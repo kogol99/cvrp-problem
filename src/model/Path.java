@@ -12,4 +12,11 @@ public class Path {
     public List<CombinationCities> getCombinationCitiesList() {
         return combinationCitiesList;
     }
+
+    @Override
+    public String toString() {
+        return "Path{" +
+                "combinationCitiesList=" + combinationCitiesList +
+                '}';
+    }
 }

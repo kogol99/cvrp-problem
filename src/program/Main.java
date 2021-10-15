@@ -4,6 +4,8 @@ import file.CvrpFileRepository;
 import file.FileRepository;
 import model.CombinationCities;
 import model.CvrpData;
+import model.Path;
+import solution.Solution;
 
 import java.util.List;
 
@@ -15,8 +17,12 @@ public class Main {
         System.out.println(cvrpData);
 
         RandomPathAlgorithm randomPathAlgorithm = new RandomPathAlgorithm();
-        randomPathAlgorithm.createOptimalPath(cvrpData);
-        System.out.println();
+        Path randomPath = randomPathAlgorithm.createOptimalPath(cvrpData);
+
+        Solution solution = new Solution(randomPath, cvrpData);
+        solution.printPathSolution();
+        solution.printCostResult();
+
 
     }
 }
