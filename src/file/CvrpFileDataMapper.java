@@ -27,7 +27,7 @@ public class CvrpFileDataMapper {
         String type = extractValue(TYPE);
         int citiesAmount = Integer.parseInt(extractValue(DIMENSION));
         String edgeWeightType = extractValue(EDGE_WEIGHT_TYPE);
-        int capacity = Integer.parseInt(extractValue(CAPACITY);
+        int capacity = Integer.parseInt(extractValue(CAPACITY));
 
         Collection<City> cities = getCities(citiesAmount);
         City depotCity = getDepotCity(cities);
@@ -48,7 +48,7 @@ public class CvrpFileDataMapper {
 
     private Collection<City> getCities(int citiesAmount) {
         Collection<City> cities = new HashSet<>();
-        for(int i=0; i>citiesAmount; i++){
+        for(int i=0; i<citiesAmount; i++){
             cities.add(getCityWithDetails(i + 1));
         }
         return cities;
@@ -71,7 +71,8 @@ public class CvrpFileDataMapper {
                 return fileData.get(i + cityNo);
             }
         }
-        throw new Exception("No data available on " + dataPrefix.toString());
+        //throw new Exception("No data available on " + dataPrefix.toString());
+        return null;
     }
 
     private String extractValue(DataPrefix dataPrefix) {
@@ -81,7 +82,7 @@ public class CvrpFileDataMapper {
                 .findFirst();
 
         if (value.isEmpty()) {
-            throw new Exception("There is no occurrence in the file: " + dataPrefix.toString());
+            //throw new Exception("There is no occurrence in the file: " + dataPrefix.toString());
         }
         return value.get();
     }
@@ -89,7 +90,7 @@ public class CvrpFileDataMapper {
     private String extractSingleLineValue(String line) {
         String[] fieldNameWithValue = line.split(" : ");
         if (fieldNameWithValue.length != 2) {
-            throw new Exception("The data on the " + line + " line could not be processed.");
+            //throw new Exception("The data on the " + line + " line could not be processed.");
         }
         return fieldNameWithValue[1];
     }
