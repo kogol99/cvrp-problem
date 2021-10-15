@@ -1,4 +1,4 @@
-package program;
+package path;
 
 import model.City;
 import model.CombinationCities;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class RandomPathAlgorithm implements CustomPathAlgorithm{
+public class RandomPathAlgorithm implements CustomPathAlgorithm {
 
     Random random = new Random();
 
