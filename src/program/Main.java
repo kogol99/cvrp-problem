@@ -9,6 +9,7 @@ import path.RandomPathAlgorithm;
 import solution.Solution;
 import solution.mutation.InversionMutation;
 import solution.mutation.Mutation;
+import solution.mutation.SwapMutation;
 
 public class Main {
 
@@ -30,6 +31,10 @@ public class Main {
         Solution solution1 = new Solution(greedyPath, cvrpData);
         solution1.printPathSolution();
         solution1.printCostResult();
+
+        Mutation swapMutation = new SwapMutation();
+        Path pathAfterSwapMutation = swapMutation.mutation(greedyPath);
+        System.out.println(pathAfterSwapMutation);
 
         Mutation mutation = new InversionMutation();
         Path pathAfterInveriosnMutation = mutation.mutation(greedyPath);

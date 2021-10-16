@@ -17,12 +17,10 @@ public class InversionMutation implements Mutation{
         List<CombinationCities> newCombinationCitiesList = new ArrayList<>();
         List<CombinationCities> oldCombinationCitiesList = newPath.getCombinationCitiesList();
         int firstPosition = random.nextInt(oldCombinationCitiesList.size());
-        int secondPostion = -1;
+        int secondPostion = firstPosition;
         while(firstPosition == secondPostion || firstPosition > secondPostion){
             secondPostion = random.nextInt(oldCombinationCitiesList.size() - 1);
         }
-        System.out.println("First" + firstPosition);
-        System.out.println("Second" + secondPostion);
         int iterator = 0;
         while (iterator < firstPosition){
             newCombinationCitiesList.add(oldCombinationCitiesList.get(iterator).getClone());
