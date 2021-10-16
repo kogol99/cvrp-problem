@@ -47,7 +47,7 @@ public class RandomPathAlgorithm implements CustomPathAlgorithm {
     }
 
     public void addDepotCity(List<CombinationCities> combinationCitiesList, City depotCity){
-        combinationCitiesList.add(0, new CombinationCities(depotCity, combinationCitiesList.get(0).getOriginPlace()));
-        combinationCitiesList.get(combinationCitiesList.size() - 1).setDestinationPlace(depotCity);
+        combinationCitiesList.add(0, new CombinationCities(depotCity, combinationCitiesList.get(0).getOriginCity()));
+        combinationCitiesList.get(combinationCitiesList.size() - 1).setDestinationCity(depotCity);
     }
 }

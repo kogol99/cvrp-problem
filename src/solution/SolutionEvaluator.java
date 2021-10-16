@@ -21,8 +21,8 @@ public class SolutionEvaluator
     }
 
     public static double calculateDistance(CombinationCities connection) {
-        City originPlace = connection.getOriginPlace();
-        City destinationPlace = connection.getDestinationPlace();
+        City originPlace = connection.getOriginCity();
+        City destinationPlace = connection.getDestinationCity();
         return Point2D.distance(
                 originPlace.getxCoord(),
                 originPlace.getyCoord(),

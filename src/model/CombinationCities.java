@@ -2,8 +2,8 @@ package model;
 
 import java.util.Objects;
 
-public class CombinationCities {
-    private final City originCity;
+public class CombinationCities{
+    private City originCity;
     private City destinationCity;
 
     public CombinationCities(City originCity, City destinationCity){
@@ -15,15 +15,19 @@ public class CombinationCities {
         return originCity.equals(city) || destinationCity.equals(city);
     }
 
-    public City getOriginPlace() {
+    public City getOriginCity() {
         return originCity;
     }
 
-    public City getDestinationPlace() {
+    public void setOriginCity(City originCity) {
+        this.originCity = originCity;
+    }
+
+    public City getDestinationCity() {
         return destinationCity;
     }
 
-    public void setDestinationPlace(City destinationPlace) {
+    public void setDestinationCity(City destinationPlace) {
         this.destinationCity = destinationPlace;
     }
 
@@ -31,12 +35,12 @@ public class CombinationCities {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof CombinationCities that)) return false;
-        return getOriginPlace().equals(that.getOriginPlace()) && getDestinationPlace().equals(that.getDestinationPlace());
+        return getOriginCity().equals(that.getOriginCity()) && getDestinationCity().equals(that.getDestinationCity());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getOriginPlace(), getDestinationPlace());
+        return Objects.hash(getOriginCity(), getDestinationCity());
     }
 
     @Override

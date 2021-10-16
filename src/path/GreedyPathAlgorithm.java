@@ -4,7 +4,6 @@ import model.City;
 import model.CombinationCities;
 import model.CvrpData;
 import model.Path;
-import solution.Solution;
 import solution.SolutionEvaluator;
 
 import java.util.ArrayList;
@@ -42,14 +41,14 @@ public class GreedyPathAlgorithm implements CustomPathAlgorithm {
                 availableConnections.add(new CombinationCities(originCity, city));
             }
             availableConnections.sort(Comparator.comparing(SolutionEvaluator::calculateDistance));
-            return availableConnections.get(0).getDestinationPlace();
+            return availableConnections.get(0).getDestinationCity();
         } else {
             return null;
         }
     }
 
     public void addDepotCity(List<CombinationCities> combinationCitiesList, City depotCity){
-        combinationCitiesList.get(combinationCitiesList.size() - 1).setDestinationPlace(depotCity);
+        combinationCitiesList.get(combinationCitiesList.size() - 1).setDestinationCity(depotCity);
     }
 
 }

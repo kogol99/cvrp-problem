@@ -25,7 +25,7 @@ public class Solution {
         Path repairedPath = repairPath();
         System.out.println("Path: ");
         for(CombinationCities combinationCities : repairedPath.getCombinationCitiesList()){
-            System.out.println(combinationCities.getOriginPlace() + " -> " + combinationCities.getDestinationPlace().toString());
+            System.out.println(combinationCities.getOriginCity() + " -> " + combinationCities.getDestinationCity().toString());
         }
     }
 
@@ -36,12 +36,12 @@ public class Solution {
         City depotCity = cvrpData.getDepotCity();
 
         for (CombinationCities actualCombinationCities : combinationCitiesList) {
-            int toUnloadValue = actualCombinationCities.getDestinationPlace().getDemand();
+            int toUnloadValue = actualCombinationCities.getDestinationCity().getDemand();
             if (toUnloadValue <= truck.getAvailableCapacity()) {
                 newCombinationCitiesList.add(actualCombinationCities);
             } else {
-                CombinationCities depotToCityCombinationCities = new CombinationCities(depotCity, actualCombinationCities.getDestinationPlace());
-                actualCombinationCities.setDestinationPlace(depotCity);
+                CombinationCities depotToCityCombinationCities = new CombinationCities(depotCity, actualCombinationCities.getDestinationCity());
+                actualCombinationCities.setDestinationCity(depotCity);
                 newCombinationCitiesList.add(actualCombinationCities);
                 newCombinationCitiesList.add(depotToCityCombinationCities);
                 truck.load();
