@@ -15,7 +15,7 @@ public class SwapMutation implements Mutation{
         Path newPath = path.getClone();
         int firstPosition = random.nextInt(newPath.getCombinationCitiesList().size());
         int secondPostion = Integer.parseInt(null);
-        while(firstPosition != secondPostion){
+        while(firstPosition == secondPostion){
             secondPostion = random.nextInt(newPath.getCombinationCitiesList().size() - 1);
         }
         CombinationCities latestFirstCombination = newPath.getCombinationCitiesList().get(firstPosition);

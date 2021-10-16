@@ -2,7 +2,7 @@ package model;
 
 import java.util.Objects;
 
-public class CombinationCities{
+public class CombinationCities implements Cloneable{
     private City originCity;
     private City destinationCity;
 
@@ -49,5 +49,19 @@ public class CombinationCities{
                 "originPlace=" + originCity +
                 ", destinationPlace=" + destinationCity +
                 '}';
+    }
+
+    public CombinationCities getClone(){
+        try {
+            return (CombinationCities) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

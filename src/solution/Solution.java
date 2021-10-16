@@ -30,7 +30,8 @@ public class Solution {
     }
 
     public Path repairPath(){
-        List<CombinationCities> combinationCitiesList = path.getCombinationCitiesList();
+        Path newPath = this.path.getClone();
+        List<CombinationCities> combinationCitiesList = newPath.getCombinationCitiesList();
         List<CombinationCities> newCombinationCitiesList = new ArrayList<>();
         Truck truck = new Truck(cvrpData.getCapacity());
         City depotCity = cvrpData.getDepotCity();

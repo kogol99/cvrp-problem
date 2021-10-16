@@ -7,6 +7,8 @@ import model.Path;
 import path.GreedyPathAlgorithm;
 import path.RandomPathAlgorithm;
 import solution.Solution;
+import solution.mutation.InversionMutation;
+import solution.mutation.Mutation;
 
 public class Main {
 
@@ -29,6 +31,7 @@ public class Main {
         solution1.printPathSolution();
         solution1.printCostResult();
 
-
+        Mutation mutation = new InversionMutation();
+        Path pathAfterInveriosnMutation = mutation.mutation(greedyPath);
     }
 }
