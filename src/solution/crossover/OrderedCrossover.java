@@ -16,7 +16,7 @@ public class OrderedCrossover implements Crossover{
         List<CombinationCities> newCombinationCitiesList = new ArrayList<>();
         List<CombinationCities> path1CombinationCitiestList = path1.getCombinationCitiesList();
         List<CombinationCities> path2CombinationCitiestList = path2.getCombinationCitiesList();
-        int firstPosition = random.nextInt(path1.getCombinationCitiesList().size());
+        int firstPosition = random.nextInt(path1.getCombinationCitiesList().size() - 1);
         int secondPostion = firstPosition;
         while(firstPosition == secondPostion || firstPosition > secondPostion){
             secondPostion = random.nextInt(path1.getCombinationCitiesList().size() - 1);
@@ -41,7 +41,7 @@ public class OrderedCrossover implements Crossover{
             newCombinationCitiesList.add(new CombinationCities(null, path1CombinationCitiestList.get(iterator).getDestinationCity()));
             iterator++;
         }
-        while (iterator < path1CombinationCitiestList.size()){
+        while (iterator < path1CombinationCitiestList.size() - 1){
             while(unchangedCities.contains(path2CombinationCitiestList.get(secondPathIterator).getDestinationCity().getNumber())) {
                 secondPathIterator++;
             }

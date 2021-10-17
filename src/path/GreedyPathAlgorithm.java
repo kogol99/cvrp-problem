@@ -48,7 +48,7 @@ public class GreedyPathAlgorithm implements CustomPathAlgorithm {
     }
 
     public void addDepotCity(List<CombinationCities> combinationCitiesList, City depotCity){
-        combinationCitiesList.get(combinationCitiesList.size() - 1).setDestinationCity(depotCity);
+        combinationCitiesList.add(new CombinationCities(combinationCitiesList.get(combinationCitiesList.size() - 1).getDestinationCity(), depotCity));
     }
 
 }

@@ -8,6 +8,7 @@ import path.GreedyPathAlgorithm;
 import path.RandomPathAlgorithm;
 import solution.Solution;
 import solution.crossover.Crossover;
+import solution.crossover.CycleCrossover;
 import solution.crossover.OrderedCrossover;
 import solution.mutation.InversionMutation;
 import solution.mutation.Mutation;
@@ -42,6 +43,8 @@ public class Main {
 
         Crossover OC = new OrderedCrossover();
         Path oCPath = OC.Crossover(greedyPath, randomPath);
-        System.out.println(oCPath.getCombinationCitiesList());
+
+        Crossover CC = new CycleCrossover();
+        Path cCPath = CC.Crossover(greedyPath, randomPath);
     }
 }

@@ -16,7 +16,7 @@ public class InversionMutation implements Mutation{
         Path newPath = path.getClone();
         List<CombinationCities> newCombinationCitiesList = new ArrayList<>();
         List<CombinationCities> oldCombinationCitiesList = newPath.getCombinationCitiesList();
-        int firstPosition = random.nextInt(oldCombinationCitiesList.size());
+        int firstPosition = random.nextInt(oldCombinationCitiesList.size() - 1);
         int secondPostion = firstPosition;
         while(firstPosition == secondPostion || firstPosition > secondPostion){
             secondPostion = random.nextInt(oldCombinationCitiesList.size() - 1);
@@ -39,7 +39,7 @@ public class InversionMutation implements Mutation{
             );
             iterator++;
         }
-        while (iterator < oldCombinationCitiesList.size()){
+        while (iterator < oldCombinationCitiesList.size() - 1){
             newCombinationCitiesList.add(oldCombinationCitiesList.get(iterator).getClone());
             if(iterator == secondPostion){
                 newCombinationCitiesList.get(newCombinationCitiesList.size() - 1).setOriginCity(oldCombinationCitiesList.get(firstPosition + secondPostion - iterator).getOriginCity());

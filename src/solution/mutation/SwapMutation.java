@@ -13,7 +13,7 @@ public class SwapMutation implements Mutation{
     @Override
     public Path mutation(Path path) {
         Path newPath = path.getClone();
-        int firstPosition = random.nextInt(newPath.getCombinationCitiesList().size());
+        int firstPosition = random.nextInt(newPath.getCombinationCitiesList().size() - 1);
         int secondPostion = firstPosition;
         while(firstPosition == secondPostion){
             secondPostion = random.nextInt(newPath.getCombinationCitiesList().size() - 1);
