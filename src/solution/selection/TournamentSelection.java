@@ -17,15 +17,15 @@ public class TournamentSelection implements Selection{
     public Path selection(List<Path> population) {
         Config config = new Config();
         int tournamentSize = config.getTournamentSize();
-        int noOfIndividuals = population.size();
+        int populationSize = population.size();
         int selectedQuantity = 0;
         List<Path> selectedPath = new ArrayList<>();
-        if(tournamentSize > population.size()){
-            tournamentSize = population.size();
+        if(tournamentSize > populationSize){
+            tournamentSize = populationSize;
         }
 
         while(selectedQuantity < tournamentSize){
-            int randId = random.nextInt(population.size());
+            int randId = random.nextInt(populationSize);
             if(!selectedPath.contains(population.get(randId))){
                 selectedQuantity++;
                 selectedPath.add(population.get(randId));

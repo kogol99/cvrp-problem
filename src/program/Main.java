@@ -14,6 +14,7 @@ import solution.crossover.OrderedCrossover;
 import solution.mutation.InversionMutation;
 import solution.mutation.Mutation;
 import solution.mutation.SwapMutation;
+import solution.selection.RouletteSelection;
 import solution.selection.Selection;
 import solution.selection.TournamentSelection;
 
@@ -58,5 +59,9 @@ public class Main {
         pathList.add(greedyPath);
         pathList.add(randomPath);
         tournamentSelection.selection(pathList);
+
+        Selection rouletteSelection = new RouletteSelection();
+        rouletteSelection.selection(pathList);
+
     }
 }
