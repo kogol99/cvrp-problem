@@ -7,6 +7,8 @@ import model.Path;
 import path.GreedyPathAlgorithm;
 import path.RandomPathAlgorithm;
 import solution.Solution;
+import solution.crossover.Crossover;
+import solution.crossover.OrderedCrossover;
 import solution.mutation.InversionMutation;
 import solution.mutation.Mutation;
 import solution.mutation.SwapMutation;
@@ -34,9 +36,12 @@ public class Main {
 
         Mutation swapMutation = new SwapMutation();
         Path pathAfterSwapMutation = swapMutation.mutation(greedyPath);
-        System.out.println(pathAfterSwapMutation);
 
         Mutation mutation = new InversionMutation();
         Path pathAfterInveriosnMutation = mutation.mutation(greedyPath);
+
+        Crossover OC = new OrderedCrossover();
+        Path oCPath = OC.Crossover(greedyPath, randomPath);
+        System.out.println(oCPath.getCombinationCitiesList());
     }
 }

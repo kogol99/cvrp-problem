@@ -18,8 +18,6 @@ public class SwapMutation implements Mutation{
         while(firstPosition == secondPostion){
             secondPostion = random.nextInt(newPath.getCombinationCitiesList().size() - 1);
         }
-        System.out.println("First" + firstPosition);
-        System.out.println("Second" + secondPostion);
         CombinationCities latestFirstCombination = newPath.getCombinationCitiesList().get(firstPosition);
         CombinationCities latestSecondCombination = newPath.getCombinationCitiesList().get(secondPostion);
         City newFirstPosition = latestSecondCombination.getDestinationCity();

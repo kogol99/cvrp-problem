@@ -28,7 +28,7 @@ public class InversionMutation implements Mutation{
         }
         while (iterator < secondPostion){
             CombinationCities oldCombinationCitiesListElement = oldCombinationCitiesList.get(firstPosition + secondPostion - iterator - 1);
-            if(iterator == firstPosition){
+            if(iterator == firstPosition && iterator != 0){
                 newCombinationCitiesList.get(newCombinationCitiesList.size() - 1).setDestinationCity(oldCombinationCitiesListElement.getDestinationCity());
             }
             newCombinationCitiesList.add(
