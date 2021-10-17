@@ -2,6 +2,7 @@ package program;
 
 import file.CvrpFileRepository;
 import file.FileRepository;
+import model.CombinationCities;
 import model.CvrpData;
 import model.Path;
 import path.GreedyPathAlgorithm;
@@ -13,6 +14,11 @@ import solution.crossover.OrderedCrossover;
 import solution.mutation.InversionMutation;
 import solution.mutation.Mutation;
 import solution.mutation.SwapMutation;
+import solution.selection.Selection;
+import solution.selection.TournamentSelection;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -46,5 +52,11 @@ public class Main {
 
         Crossover CC = new CycleCrossover();
         Path cCPath = CC.Crossover(greedyPath, randomPath);
+
+        Selection tournamentSelection = new TournamentSelection();
+        List<Path> pathList = new ArrayList<>();
+        pathList.add(greedyPath);
+        pathList.add(randomPath);
+        tournamentSelection.selection(pathList);
     }
 }
