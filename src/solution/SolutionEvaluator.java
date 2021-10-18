@@ -12,8 +12,8 @@ public class SolutionEvaluator
     private SolutionEvaluator() {
     }
 
-    public static double evaluate(Path solution) {
-        List<CombinationCities> connections = solution.getCombinationCitiesList();
+    public static double evaluate(Path solutionPath) {
+        List<CombinationCities> connections = solutionPath.getCombinationCitiesList();
 
         return connections.stream()
                 .mapToDouble(SolutionEvaluator::calculateDistance)

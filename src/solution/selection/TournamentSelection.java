@@ -25,7 +25,7 @@ public class TournamentSelection implements Selection{
         }
 
         while(selectedQuantity < tournamentSize){
-            int randId = random.nextInt(populationSize);
+            int randId = random.nextInt(populationSize - 1);
             if(!selectedPath.contains(population.get(randId))){
                 selectedQuantity++;
                 selectedPath.add(population.get(randId));
