@@ -15,11 +15,11 @@ public class SwapMutation implements Mutation{
     @Override
     public Path mutation(Path path) {
         Path newPath = path.getClone();
-        if(random.nextDouble() > config.getPm()){
-            int firstPosition = random.nextInt(newPath.getCombinationCitiesList().size() - 1);
+        if(random.nextDouble() < config.getPm()){
+            int firstPosition = random.nextInt(newPath.getCombinationCitiesList().size() - 3);
             int secondPostion = firstPosition;
             while(firstPosition == secondPostion){
-                secondPostion = random.nextInt(newPath.getCombinationCitiesList().size() - 1);
+                secondPostion = random.nextInt(newPath.getCombinationCitiesList().size() - 2);
             }
             CombinationCities latestFirstCombination = newPath.getCombinationCitiesList().get(firstPosition);
             CombinationCities latestSecondCombination = newPath.getCombinationCitiesList().get(secondPostion);

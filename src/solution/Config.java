@@ -2,10 +2,10 @@ package solution;
 
 public class Config {
 
-    private final int tournamentSize = 5;  // the number of individual drawn in the tournament
-    private final int populationSize = 10;
-    private final int gAIterationValue = 20;
-    private final double px = 0.7;
+    private final int tournamentSize = 20;  // the number of individual drawn in the tournament
+    private final int populationSize = 200;
+    private final int gAIterationValue = 300;
+    private final double px = 0.2;
     private final double pm = 0.1;
 
     public Config() {

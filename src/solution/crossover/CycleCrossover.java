@@ -14,10 +14,12 @@ public class CycleCrossover implements Crossover{
     @Override
     public Path Crossover(Path path1, Path path2) {
         List<CombinationCities> newCombinationCitiesList = new ArrayList<>();
-        List<CombinationCities> path1CombinationCitiestList = path1.getCombinationCitiesList();
-        List<CombinationCities> path2CombinationCitiestList = path2.getCombinationCitiesList();
+        Path path1Clone = path1.getClone();
+        Path path2Clone = path2.getClone();
+        List<CombinationCities> path1CombinationCitiestList = path1Clone.getCombinationCitiesList();
+        List<CombinationCities> path2CombinationCitiestList = path2Clone.getCombinationCitiesList();
 
-        int firstPostion = random.nextInt(path1CombinationCitiestList.size() - 1);
+        int firstPostion = random.nextInt(path1CombinationCitiestList.size() - 2);
         int actualId = firstPostion;
         List<Integer> cycledList = new ArrayList<>();
         cycledList.add(path1CombinationCitiestList.get(firstPostion).getDestinationCity().getNumber());

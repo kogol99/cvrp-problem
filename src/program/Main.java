@@ -76,9 +76,13 @@ public class Main {
     private static void test1(){
         FileRepository repository = new CvrpFileRepository();
         CvrpData cvrpData1 = repository.getCvrpData("src/resources/A-n32-k5.vrp");
-        GenethicAlgorithm gA1 = new GenethicAlgorithm(InitialiseType.RANDOM_INITIALISE, SelectionType.ROULETTE_SELECTION,
+        GenethicAlgorithm gA1 = new GenethicAlgorithm(InitialiseType.RANDOM_INITIALISE, SelectionType.TOURNAMENT_SELECTION,
                 CrossoverType.CYCLE_CROSSOVER, MutationType.INVERSION_MUTATION, cvrpData1);
-        gA1.run();
+        for(int i=0; i<1; i++){
+            gA1.run();
+        }
+
+        /*
         CvrpData cvrpData2 = repository.getCvrpData("src/resources/A-n37-k6.vrp");
         GenethicAlgorithm gA2 = new GenethicAlgorithm(InitialiseType.RANDOM_INITIALISE, SelectionType.ROULETTE_SELECTION,
                 CrossoverType.CYCLE_CROSSOVER, MutationType.SWAP_MUTATION, cvrpData2);
@@ -103,18 +107,20 @@ public class Main {
         GenethicAlgorithm gA7 = new GenethicAlgorithm(InitialiseType.RANDOM_INITIALISE, SelectionType.ROULETTE_SELECTION,
                 CrossoverType.CYCLE_CROSSOVER, MutationType.SWAP_MUTATION, cvrpData7);
         gA7.run();
+        */
+
 
         Config config = new Config();
         List<List<List<Double>>> list = new ArrayList<>();
         list.add(gA1.getEndedResultList());
         List<List<Double>> avgResultList = new ArrayList<>();
-        for(int k=0; k<config.getPopulationSize(); k++){
+        for(int k=0; k<config.getgAIterationValue(); k++){
             double resultSum = 0;
             double resultMin = Double.MAX_VALUE;
             double resultMax = Double.MIN_VALUE;
-            for(int j=0; j<config.getgAIterationValue(); j++){
+            for(int j=0; j<config.getPopulationSize(); j++){
                 for(int i=0; i<1; i++){
-                    double actual = list.get(i).get(j).get(k);
+                    double actual = list.get(i).get(k).get(j);
                     resultSum += actual;
                     if(resultMin > actual) resultMin = actual;
                     if(resultMax < actual) resultMax = actual;
@@ -122,7 +128,7 @@ public class Main {
             }
             ArrayList<Double> avgResult = new ArrayList<>();
             avgResult.add(resultMin);
-            avgResult.add(resultSum/ config.getgAIterationValue());
+            avgResult.add(resultSum/ config.getPopulationSize());
             avgResult.add(resultMax);
             avgResultList.add(avgResult);
         }

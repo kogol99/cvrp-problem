@@ -78,6 +78,7 @@ public class GenethicAlgorithm {
                     o1 = p1;
                 }
                 o1 = mutationAlgorithm.mutation(o1);
+                boolean isGoodPath = cityChecker(o1);
                 Solution solution = new Solution(o1, cvrpData);
                 Path o1Result = solution.repairPath();
                 double evalValue = evaluate(o1Result);
@@ -157,5 +158,17 @@ public class GenethicAlgorithm {
 
     public List<List<Double>> getEndedResultList() {
         return endedResultList;
+    }
+
+    private boolean cityChecker(Path path){
+        HashSet<Integer> cityNoList = new HashSet<>();
+        for(CombinationCities combinationCities: path.getCombinationCitiesList()){
+            cityNoList.add(combinationCities.getDestinationCity().getNumber());
+        }
+        if(cityNoList.size() == 32){
+            return true;
+        } else {
+            return false;
+        }
     }
 }
