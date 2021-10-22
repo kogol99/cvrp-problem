@@ -22,11 +22,6 @@ public class GenethicAlgorithm {
 
     Random random = new Random();
 
-    private InitialiseType initialiseType;
-    private SelectionType selectionType;
-    private CrossoverType crossoverType;
-    private MutationType mutationType;
-
     private CvrpData cvrpData;
     private Path path;
     private Config config;
@@ -38,23 +33,22 @@ public class GenethicAlgorithm {
     private Mutation mutationAlgorithm;
 
     public GenethicAlgorithm(
-            InitialiseType initialiseType,
-            SelectionType selectionType,
-            CrossoverType crossoverType,
-            MutationType mutationType,
+            CustomPathAlgorithm pathInitialiseAlgorithm,
+            Selection selectionAlgorithm,
+            Crossover crossoverAlgorithm,
+            Mutation mutationAlgorithm,
             CvrpData cvrpData
     ){
-        this.initialiseType = initialiseType;
-        this.selectionType = selectionType;
-        this.crossoverType = crossoverType;
-        this.mutationType = mutationType;
+        this.pathInitialiseAlgorithm = pathInitialiseAlgorithm;
+        this.selectionAlgorithm = selectionAlgorithm;
+        this.crossoverAlgorithm = crossoverAlgorithm;
+        this.mutationAlgorithm = mutationAlgorithm;
         this.cvrpData = cvrpData;
         this.config = new Config();
     }
 
     public Path run(){
         List<List<Double>> resultList = new ArrayList<>();
-        initialiseAlgorithm();
         int t = 0;
         double theBestValue = Integer.MAX_VALUE;
         Path theBestPath = null;
@@ -93,33 +87,6 @@ public class GenethicAlgorithm {
         //System.out.println(resultList);
         this.endedResultList = resultList;
         return theBestPath;
-    }
-
-    public void initialiseAlgorithm(){
-        if(initialiseType == InitialiseType.RANDOM_INITIALISE){
-            pathInitialiseAlgorithm = new RandomPathAlgorithm();
-        } else {
-            pathInitialiseAlgorithm = new GreedyPathAlgorithm();
-        }
-
-        if(selectionType == SelectionType.ROULETTE_SELECTION){
-            selectionAlgorithm = new RouletteSelection();
-        } else {
-            selectionAlgorithm = new TournamentSelection();
-        }
-
-        if(crossoverType == CrossoverType.CYCLE_CROSSOVER){
-            crossoverAlgorithm = new CycleCrossover();
-        } else {
-            crossoverAlgorithm = new OrderedCrossover();
-        }
-
-        if(mutationType == MutationType.INVERSION_MUTATION){
-            mutationAlgorithm = new InversionMutation();
-        } else {
-            mutationAlgorithm = new SwapMutation();
-        }
-
     }
 
     private List<Path> initialisePopulation(){
