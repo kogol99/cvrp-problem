@@ -3,6 +3,7 @@ package solution;
 public class Config {
 
     private final int tournamentSize = 40;  // the number of individual drawn in the tournament
+    private final int rouletteSize = 40;
     private final int populationSize = 100;
     private final int gAIterationValue = 100;
     private final double px = 0.7;
@@ -30,5 +31,9 @@ public class Config {
 
     public double getPm() {
         return pm;
+    }
+
+    public int getRouletteSize() {
+        return rouletteSize;
     }
 }

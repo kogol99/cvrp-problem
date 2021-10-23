@@ -1,16 +1,18 @@
 package solution.selection;
 
+import model.CombinationCities;
 import model.Path;
+import solution.Config;
 import solution.SolutionEvaluator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+
+import static solution.SolutionEvaluator.evaluate;
 
 public class RouletteSelection implements Selection{
 
     Random random = new Random();
+    Config config = new Config();
 
     @Override
     public Path selection(List<Path> population) {
@@ -30,15 +32,31 @@ public class RouletteSelection implements Selection{
             smallPopulationSum += value;
         }
 
-
-        double randValue = random.nextDouble();
-
-        double sum = 0;
-        int iterator = 0;
-        while (sum < randValue){
-            sum += evalList2.get(iterator)/smallPopulationSum;
-            iterator++;
+        int rouletteSize = config.getRouletteSize();
+        int populationSize = population.size();
+        int selectedQuantity = 0;
+        List<Path> selectedPath = new ArrayList<>();
+        if(rouletteSize > populationSize){
+            rouletteSize = populationSize;
         }
-        return population.get(iterator - 1);
+        while(selectedQuantity < rouletteSize){
+            double randValue = random.nextDouble();
+
+            double sum = 0;
+            int iterator = 0;
+            while (sum < randValue){
+                sum += evalList2.get(iterator)/smallPopulationSum;
+                iterator++;
+            }
+            selectedPath.add(population.get(iterator - 1));
+            selectedQuantity++;
+        }
+
+        selectedPath.sort(Comparator.comparing(RouletteSelection::calculateDistance));
+        return selectedPath.get(0);
+    }
+
+    private static double calculateDistance(Path path){
+        return evaluate(path);
     }
 }
