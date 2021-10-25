@@ -49,6 +49,10 @@ public class TabuSearch {
             );
             List<Path> availableNeighborhoodListWithAddedDepot = findAvailableNeighborhoodWithAddedDepot(neighborhoodList, tabuList);
             actualPath = deleteDepotInPath(availableNeighborhoodListWithAddedDepot.get(0));
+
+
+
+
             double actualDistance = calculateDistance(availableNeighborhoodListWithAddedDepot.get(0));
             if(actualDistance < theBestValue){
                 theBestValue = actualDistance;

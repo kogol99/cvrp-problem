@@ -40,13 +40,13 @@ public class Main {
         Crossover orderedCossoverAlgorithm = new OrderedCrossover();
         Mutation inversionMutationAlgorithm = new InversionMutation();
         Mutation swapMutationAlgorithm = new SwapMutation();
-        String filePathN32K5 = "src/resources/A-n32-k5.vrp";
-        String filePathN37K6 = "src/resources/A-n37-k6.vrp";
-        String filePathN39K5 = "src/resources/A-n39-k5.vrp";
-        String filePathN45K6 = "src/resources/A-n45-k6.vrp";
-        String filePathN48K7 = "src/resources/A-n48-k7.vrp";
-        String filePathN54K7 = "src/resources/A-n54-k7.vrp";
-        String filePathN60K9 = "src/resources/A-n60-k9.vrp";
+        String filePathN32K5 = "src\\main\\java\\resources\\A-n32-k5.vrp";
+        String filePathN37K6 = "src\\main\\java\\resources\\A-n37-k6.vrp";
+        String filePathN39K5 = "src\\main\\java\\resources\\A-n39-k5.vrp";
+        String filePathN45K6 = "src\\main\\java\\resources\\A-n45-k6.vrp";
+        String filePathN48K7 = "src\\main\\java\\resources\\A-n48-k7.vrp";
+        String filePathN54K7 = "src\\main\\java\\resources\\A-n54-k7.vrp";
+        String filePathN60K9 = "src\\main\\java\\resources\\A-n60-k9.vrp";
         // test1
 /*        System.out.println("filePathN32K5");
         test(randomPathInitialiseAlgorithm, tournamentSelectionAlgorithm, orderedCossoverAlgorithm, swapMutationAlgorithm, filePathN32K5);
@@ -65,7 +65,7 @@ public class Main {
         // test2
         //test(randomPathInitialiseAlgorithm, tournamentSelectionAlgorithm, orderedCossoverAlgorithm, inversionMutationAlgorithm, filePathN32K5);
         // test3
-        //test(randomPathInitialiseAlgorithm, tournamentSelectionAlgorithm, orderedCossoverAlgorithm, swapMutationAlgorithm, filePathN32K5);
+        gATest(randomPathInitialiseAlgorithm, tournamentSelectionAlgorithm, orderedCossoverAlgorithm, swapMutationAlgorithm, filePathN32K5);
         //test(randomPathInitialiseAlgorithm, rouletteSelectionAlgorithm, orderedCossoverAlgorithm, swapMutationAlgorithm, filePathN32K5);
         // test4
         //System.out.println("orderedCossoverAlgorithm");
@@ -106,81 +106,129 @@ public class Main {
 
         /* TABU SEARCH */
 
-        TabuSearch tS = new TabuSearch(randomPathInitialiseAlgorithm, inversionMutationAlgorithm, cvrpData);
-        Path gAPath = tS.run();
-        Solution solution2 = new Solution(gAPath, cvrpData);
-        solution2.printPathSolution();
-        Solution solution3 = new Solution(solution2.repairPath(), cvrpData);
-        solution3.printCostResult();
+        //TabuSearch tS = new TabuSearch(randomPathInitialiseAlgorithm, inversionMutationAlgorithm, cvrpData);
+        //Path gAPath = tS.run();
+        //Solution solution2 = new Solution(gAPath, cvrpData);
+        //solution2.printPathSolution();
+        //Solution solution3 = new Solution(solution2.repairPath(), cvrpData);
+        //solution3.printCostResult();
 
-        System.out.println(tS.getEndedResultList());
+        //System.out.println(tS.getEndedResultList());
 
+        // test1
+        /*
+        System.out.println(filePathN32K5);
+        tSTest(randomPathInitialiseAlgorithm, inversionMutationAlgorithm, filePathN32K5);
+        System.out.println(filePathN37K6);
+        tSTest(randomPathInitialiseAlgorithm, inversionMutationAlgorithm, filePathN37K6);
+        System.out.println(filePathN39K5);
+        tSTest(randomPathInitialiseAlgorithm, inversionMutationAlgorithm, filePathN39K5);
+        System.out.println(filePathN45K6);
+        tSTest(randomPathInitialiseAlgorithm, inversionMutationAlgorithm, filePathN45K6);
+        System.out.println(filePathN48K7);
+        tSTest(randomPathInitialiseAlgorithm, inversionMutationAlgorithm, filePathN48K7);
+         */
+
+        // test2, test4, test5
+         //tSTest(randomPathInitialiseAlgorithm, inversionMutationAlgorithm, filePathN32K5);
+         //tSTest(randomPathInitialiseAlgorithm, inversionMutationAlgorithm, filePathN45K6);
+
+        // test3
+        /*
+        System.out.println("inversionMutationAlgorithm");
+        tSTest(randomPathInitialiseAlgorithm, inversionMutationAlgorithm, filePathN32K5);
+        System.out.println("swapMutationAlgorithm");
+        tSTest(randomPathInitialiseAlgorithm, swapMutationAlgorithm, filePathN32K5);
+        */
     }
 
-    private static void test(
+    private static void gATest(
             CustomPathAlgorithm pathInitialiseAlgorithm,
             Selection selectionAlgorithm,
             Crossover crossoverAlgorithm,
             Mutation mutationAlgorithm,
             String filePath
     ){
-
         FileRepository repository = new CvrpFileRepository();
         Config config = new Config();
         CvrpData cvrpData1 = repository.getCvrpData(filePath);
-        GenethicAlgorithm gA1 = new GenethicAlgorithm(pathInitialiseAlgorithm, selectionAlgorithm,
-                crossoverAlgorithm, mutationAlgorithm, cvrpData1);
-        gA1.run();
 
-        List<List<List<Double>>> list = new ArrayList<>();
-        list.add(gA1.getEndedResultList());
         List<List<Double>> avgResultList = new ArrayList<>();
-        for(int k=0; k<config.getgAIterationValue(); k++){
-            double resultSum = 0;
-            double resultMin = Double.MAX_VALUE;
-            double resultMax = Double.MIN_VALUE;
-            for(int j=0; j<config.getPopulationSize(); j++){
-                for(int i=0; i<1; i++){
-                    double actual = list.get(i).get(k).get(j);
+            for(int i=0; i<config.getgAIterationValue(); i++){
+                avgResultList.add(new ArrayList<>());
+                avgResultList.get(i).add(Double.MAX_VALUE);
+                for(int j=1; j<3; j++){
+                    avgResultList.get(i).add(0.0);
+                }
+            }
+        for(int testRepeat=0; testRepeat<TEST_REPEAT_AMOUNT + 1; testRepeat++){
+            GenethicAlgorithm gA1 = new GenethicAlgorithm(pathInitialiseAlgorithm, selectionAlgorithm,
+                    crossoverAlgorithm, mutationAlgorithm, cvrpData1);
+            gA1.run();
+            List<List<Double>> resultList = gA1.getEndedResultList();
+            double theBestValue = Double.MAX_VALUE;
+            for(int k=0; k<config.getgAIterationValue(); k++){
+                double resultSum = 0;
+                double resultMin = Double.MAX_VALUE;
+                double resultMax = Double.MIN_VALUE;
+                for(int j=0; j<config.getPopulationSize(); j++){
+                    double actual = resultList.get(k).get(j);
                     resultSum += actual;
                     if(resultMin > actual) resultMin = actual;
                     if(resultMax < actual) resultMax = actual;
+                    if(theBestValue > actual) theBestValue = actual;
                 }
+                if(theBestValue < avgResultList.get(k).get(0)){
+                    avgResultList.get(k).set(0, theBestValue);
+                }
+                avgResultList.get(k).set(1, avgResultList.get(k).get(1) + (resultSum/(config.getPopulationSize())));
+                avgResultList.get(k).set(2, avgResultList.get(k).get(2) + resultMax);
             }
-            ArrayList<Double> avgResult = new ArrayList<>();
-            avgResult.add(resultMin);
-            avgResult.add(resultSum/ config.getPopulationSize());
-            avgResult.add(resultMax);
-            avgResultList.add(avgResult);
         }
-        if(TEST_REPEAT_AMOUNT > 1){
-            for(int testRepeat=0; testRepeat<TEST_REPEAT_AMOUNT - 1; testRepeat++){
-                gA1 = new GenethicAlgorithm(pathInitialiseAlgorithm, selectionAlgorithm,
-                        crossoverAlgorithm, mutationAlgorithm, cvrpData1);
-                gA1.run();
-                for(int k=0; k<config.getgAIterationValue(); k++){
-                    double resultSum = 0;
-                    double resultMin = Double.MAX_VALUE;
-                    double resultMax = Double.MIN_VALUE;
-                    for(int j=0; j<config.getPopulationSize(); j++){
-                        for(int i=0; i<1; i++){
-                            double actual = list.get(i).get(k).get(j);
-                            resultSum += actual;
-                            if(resultMin > actual) resultMin = actual;
-                            if(resultMax < actual) resultMax = actual;
-                        }
-                    }
-                    avgResultList.get(k).set(0, avgResultList.get(k).get(0) + resultMin);
-                    avgResultList.get(k).set(1, avgResultList.get(k).get(1) + (resultSum/ config.getPopulationSize()));
-                    avgResultList.get(k).set(2, avgResultList.get(k).get(2) + resultMax);
-                }
+        for(int k=0; k<config.getgAIterationValue(); k++){
+            for(int j=1; j<3; j++){
+                avgResultList.get(k).set(j, avgResultList.get(k).get(j)/TEST_REPEAT_AMOUNT);
             }
-            for(int k=0; k<config.getgAIterationValue(); k++){
-                for(int j=0; j<3; j++){
-                    avgResultList.get(k).set(j, avgResultList.get(k).get(j)/TEST_REPEAT_AMOUNT);
-                }
-            }
+        }
+        System.out.println(avgResultList);
+    }
 
+    public static void tSTest(
+            CustomPathAlgorithm pathInitialiseAlgorithm,
+            Mutation neighborhoodAlgorithm,
+            String filePath
+    ){
+        Config config = new Config();
+        List<List<Double>> avgResultList = new ArrayList<>();
+        for(int i=0; i<config.gettS_iterAtions(); i++){
+            avgResultList.add(new ArrayList<>());
+            avgResultList.get(i).add(Double.MAX_VALUE);
+            avgResultList.get(i).add(Double.MAX_VALUE);
+            for(int j=2; j<4; j++){
+                avgResultList.get(i).add(0.0);
+            }
+        }
+        FileRepository repository = new CvrpFileRepository();
+        CvrpData tSSvrpData = repository.getCvrpData(filePath);
+        for(int testRepeat=0; testRepeat<TEST_REPEAT_AMOUNT - 1; testRepeat++){
+            TabuSearch tS = new TabuSearch(pathInitialiseAlgorithm, neighborhoodAlgorithm, tSSvrpData);
+            tS.run();
+            List<List<Double>> resultList = tS.getEndedResultList();
+            for(int k=0; k<config.gettS_iterAtions(); k++){
+                if(avgResultList.get(k).get(0) > resultList.get(k).get(0)){
+                    avgResultList.get(k).set(0, resultList.get(k).get(0));
+                }
+                if(avgResultList.get(k).get(1) > resultList.get(k).get(1)){
+                    avgResultList.get(k).set(1, resultList.get(k).get(1));
+                }
+                avgResultList.get(k).set(2, avgResultList.get(k).get(2) + resultList.get(k).get(2));
+                avgResultList.get(k).set(3, avgResultList.get(k).get(3) + resultList.get(k).get(3));
+            }
+        }
+        for(int k=0; k<config.gettS_iterAtions(); k++){
+            for(int j=2; j<4; j++){
+                avgResultList.get(k).set(j, avgResultList.get(k).get(j)/TEST_REPEAT_AMOUNT);
+            }
         }
         System.out.println(avgResultList);
     }

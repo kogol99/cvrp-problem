@@ -63,8 +63,8 @@ public class GenethicAlgorithm {
             populationList.add(new ArrayList<>());
             resultList.add(new ArrayList<>());
             while(populationList.get(t+1).size() < config.getPopulationSize()){
-                Path p1 = selectionAlgorithm.selection(populationList.get(t));
-                Path p2 = selectionAlgorithm.selection(populationList.get(t));
+                Path p1 = selectionAlgorithm.selection(populationList.get(t), cvrpData);
+                Path p2 = selectionAlgorithm.selection(populationList.get(t), cvrpData);
                 Path o1;
                 if(random.nextDouble() < config.getPx()){
                     o1 = crossoverAlgorithm.Crossover(p1, p2);

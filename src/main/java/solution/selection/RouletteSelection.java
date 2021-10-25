@@ -1,8 +1,10 @@
 package solution.selection;
 
 import model.CombinationCities;
+import model.CvrpData;
 import model.Path;
 import solution.Config;
+import solution.Solution;
 import solution.SolutionEvaluator;
 
 import java.util.*;
@@ -13,9 +15,11 @@ public class RouletteSelection implements Selection{
 
     Random random = new Random();
     Config config = new Config();
+    CvrpData cvrpData;
 
     @Override
-    public Path selection(List<Path> population) {
+    public Path selection(List<Path> population, CvrpData cvrpData) {
+        this.cvrpData = cvrpData;
         double[] evalList = population.stream()
                                     .mapToDouble(SolutionEvaluator::evaluate)
                                     .toArray();
@@ -39,6 +43,7 @@ public class RouletteSelection implements Selection{
         if(rouletteSize > populationSize){
             rouletteSize = populationSize;
         }
+        int anotherChoice = 0;
         while(selectedQuantity < rouletteSize){
             double randValue = random.nextDouble();
 
@@ -52,11 +57,37 @@ public class RouletteSelection implements Selection{
             selectedQuantity++;
         }
 
-        selectedPath.sort(Comparator.comparing(RouletteSelection::calculateDistance));
-        return selectedPath.get(0);
+        List<Path> selectedPathWithDepot = getRepairedPathsList(selectedPath);
+        selectedPathWithDepot.sort(Comparator.comparing(RouletteSelection::calculateDistance));
+        return deleteDepotInPath(selectedPathWithDepot.get(0));
     }
 
     private static double calculateDistance(Path path){
         return evaluate(path);
     }
+
+    private List<Path> getRepairedPathsList(List<Path> paths){
+        List<Path> repairedPaths = new ArrayList<>();
+        for(Path path: paths){
+            Path newPath = path.getClone();
+            Solution solution = new Solution(newPath, this.cvrpData);
+            repairedPaths.add(solution.repairPath());
+        }
+        return repairedPaths;
+    }
+
+    private List<Path> deleteDepothInPathList(List<Path> pathList){
+        List<Path> newPathList = new ArrayList<>();
+        for(Path path: pathList){
+            newPathList.add(deleteDepotInPath(path));
+        }
+        return newPathList;
+    }
+
+    private Path deleteDepotInPath(Path path){
+        Path newPath = path.getClone();
+        Solution solution = new Solution(newPath, this.cvrpData);
+        return solution.deleteDepot(newPath);
+    }
+
 }
