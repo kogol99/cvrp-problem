@@ -17,19 +17,15 @@ public class InversionMutation implements Mutation{
     @Override
     public Path mutation(Path path) {
         Path newPath = path.getClone();
-        if(random.nextDouble() < config.getPm()) {
-            List<CombinationCities> oldCombinationCitiesList = newPath.getCombinationCitiesList();
-            int firstPosition = random.nextInt(oldCombinationCitiesList.size() - 3);
-            int secondPostion = firstPosition;
-            while (firstPosition == secondPostion || firstPosition > secondPostion) {
-                secondPostion = random.nextInt(oldCombinationCitiesList.size() - 2);
-            }
-            ArrayList<Integer> cityNoList;
-            cityNoList = convertPathToCityNoList(newPath);
-            return createPathAfterReverse(reverseCityBetween(firstPosition, secondPostion, cityNoList), oldCombinationCitiesList);
-        } else {
-            return newPath;
+        List<CombinationCities> oldCombinationCitiesList = newPath.getCombinationCitiesList();
+        int firstPosition = random.nextInt(oldCombinationCitiesList.size() - 3);
+        int secondPostion = firstPosition;
+        while (firstPosition == secondPostion || firstPosition > secondPostion) {
+            secondPostion = random.nextInt(oldCombinationCitiesList.size() - 2);
         }
+        ArrayList<Integer> cityNoList;
+        cityNoList = convertPathToCityNoList(newPath);
+        return createPathAfterReverse(reverseCityBetween(firstPosition, secondPostion, cityNoList), oldCombinationCitiesList);
     }
 
     private ArrayList<Integer> convertPathToCityNoList(Path path){

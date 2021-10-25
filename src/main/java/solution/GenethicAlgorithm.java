@@ -71,7 +71,9 @@ public class GenethicAlgorithm {
                 } else {
                     o1 = p1;
                 }
-                o1 = mutationAlgorithm.mutation(o1);
+                if(random.nextDouble() < config.getPm()){
+                    o1 = mutationAlgorithm.mutation(o1);
+                }
                 boolean isGoodPath = cityChecker(o1);
                 Solution solution = new Solution(o1, cvrpData);
                 Path o1Result = solution.repairPath();

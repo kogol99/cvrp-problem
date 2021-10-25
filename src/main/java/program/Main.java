@@ -9,6 +9,7 @@ import path.RandomPathAlgorithm;
 import solution.Config;
 import solution.GenethicAlgorithm;
 import solution.Solution;
+import solution.TabuSearch;
 import solution.crossover.Crossover;
 import solution.crossover.CycleCrossover;
 import solution.crossover.OrderedCrossover;
@@ -27,50 +28,9 @@ public class Main {
 
     public static void main(String[] args) {
         FileRepository repository = new CvrpFileRepository();
-        CvrpData cvrpData = repository.getCvrpData("src/resources/A-n32-k5.vrp");
+
+        CvrpData cvrpData = repository.getCvrpData("src\\main\\java\\resources\\A-n32-k5.vrp");
         System.out.println(cvrpData);
-/*
-        RandomPathAlgorithm randomPathAlgorithm = new RandomPathAlgorithm();
-        Path randomPath = randomPathAlgorithm.createOptimalPath(cvrpData);
-
-        Solution solution = new Solution(randomPath, cvrpData);
-        solution.printPathSolution();
-        solution.printCostResult();
-
-        GreedyPathAlgorithm greedyPathAlgorithm = new GreedyPathAlgorithm();
-        Path greedyPath = greedyPathAlgorithm.createOptimalPath(cvrpData);
-
-        Solution solution1 = new Solution(greedyPath, cvrpData);
-        solution1.printPathSolution();
-        solution1.printCostResult();
-
-        Mutation swapMutation = new SwapMutation();
-        Path pathAfterSwapMutation = swapMutation.mutation(greedyPath);
-
-        Mutation mutation = new InversionMutation();
-        Path pathAfterInveriosnMutation = mutation.mutation(greedyPath);
-
-        Crossover OC = new OrderedCrossover();
-        Path oCPath = OC.Crossover(greedyPath, randomPath);
-
-        Crossover CC = new CycleCrossover();
-        Path cCPath = CC.Crossover(greedyPath, randomPath);
-
-        Selection tournamentSelection = new TournamentSelection();
-        List<Path> pathList = new ArrayList<>();
-        pathList.add(greedyPath);
-        pathList.add(randomPath);
-        tournamentSelection.selection(pathList);
-
-        Selection rouletteSelection = new RouletteSelection();
-        rouletteSelection.selection(pathList);
-*/ /*
-        GenethicAlgorithm gA = new GenethicAlgorithm(InitialiseType.RANDOM_INITIALISE, SelectionType.TOURNAMENT_SELECTION, CrossoverType.CYCLE_CROSSOVER, MutationType.SWAP_MUTATION, cvrpData);
-        Path gAPath = gA.run();
-        Solution solution2 = new Solution(gAPath, cvrpData);
-        solution2.printPathSolution();
-        solution2.printCostResult();
-*/
 
         CustomPathAlgorithm randomPathInitialiseAlgorithm = new RandomPathAlgorithm();
         CustomPathAlgorithm greedyPathInitialiseAlgorithm = new GreedyPathAlgorithm();
@@ -103,10 +63,10 @@ public class Main {
         System.out.println("filePathN60K9");
         test(randomPathInitialiseAlgorithm, tournamentSelectionAlgorithm, orderedCossoverAlgorithm, swapMutationAlgorithm, filePathN60K9);*/
         // test2
-        //test(randomPathInitialiseAlgorithm, tournamentSelectionAlgorithm, orderedCossoverAlgorithm, swapMutationAlgorithm, filePathN32K5);
+        //test(randomPathInitialiseAlgorithm, tournamentSelectionAlgorithm, orderedCossoverAlgorithm, inversionMutationAlgorithm, filePathN32K5);
         // test3
         //test(randomPathInitialiseAlgorithm, tournamentSelectionAlgorithm, orderedCossoverAlgorithm, swapMutationAlgorithm, filePathN32K5);
-        test(randomPathInitialiseAlgorithm, rouletteSelectionAlgorithm, orderedCossoverAlgorithm, swapMutationAlgorithm, filePathN32K5);
+        //test(randomPathInitialiseAlgorithm, rouletteSelectionAlgorithm, orderedCossoverAlgorithm, swapMutationAlgorithm, filePathN32K5);
         // test4
         //System.out.println("orderedCossoverAlgorithm");
         //test(randomPathInitialiseAlgorithm, tournamentSelectionAlgorithm, orderedCossoverAlgorithm, swapMutationAlgorithm, filePathN32K5);
@@ -139,11 +99,21 @@ public class Main {
         Solution solution1 = new Solution(greedyPath, cvrpDataGreedy);
         Solution repairedSolution1 = new Solution(solution1.repairPath(), cvrpDataGreedy);
         repairedSolution1.printCostResult();
-
          */
 
         //test(randomPathInitialiseAlgorithm, tournamentSelectionAlgorithm, cycleCrossoverAlgorithm, inversionMutationAlgorithm, filePathN45K6);
 
+
+        /* TABU SEARCH */
+
+        TabuSearch tS = new TabuSearch(randomPathInitialiseAlgorithm, inversionMutationAlgorithm, cvrpData);
+        Path gAPath = tS.run();
+        Solution solution2 = new Solution(gAPath, cvrpData);
+        solution2.printPathSolution();
+        Solution solution3 = new Solution(solution2.repairPath(), cvrpData);
+        solution3.printCostResult();
+
+        System.out.println(tS.getEndedResultList());
 
     }
 

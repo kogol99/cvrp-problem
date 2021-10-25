@@ -51,4 +51,23 @@ public class Solution {
         }
         return new Path(newCombinationCitiesList);
     }
+
+    public Path deleteDepot(Path path) {
+        Path newPath = this.path.getClone();
+        List<CombinationCities> combinationCitiesList = newPath.getCombinationCitiesList();
+        List<CombinationCities> newCombinationCitiesList = new ArrayList<>();
+        Truck truck = new Truck(cvrpData.getCapacity());
+        City depotCity = cvrpData.getDepotCity();
+
+        boolean isFirstCity = true;
+        for (CombinationCities actualCombinationCities : combinationCitiesList) {
+            if (actualCombinationCities.getOriginCity().getNumber() == depotCity.getNumber() && !isFirstCity) {
+                newCombinationCitiesList.get(newCombinationCitiesList.size() - 1).setDestinationCity(actualCombinationCities.getDestinationCity());
+            } else {
+                newCombinationCitiesList.add(actualCombinationCities);
+            }
+            isFirstCity = false;
+        }
+        return new Path(newCombinationCitiesList);
+    }
 }
